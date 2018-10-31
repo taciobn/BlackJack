@@ -13,6 +13,7 @@ var turno
 
 
 func _ready():
+	reset()
 	createDack()
 	pass
 
@@ -56,6 +57,26 @@ func createDack():
 			pass
 		
 		pass
+func reset():
+	pos_mao_jogador = Vector2(300,500)
+	pos_mao_mesa = Vector2(300,180)
+	valor_mao_jogador = 0
+	valor_mao_mesa = 0
+	
+	for i in get_node("mao_mesa").get_children():
+		get_node("mao_mesa").remove_child(i)
+		i.queue_free()
+	for i in get_node("mao_jogador").get_children():
+		get_node("mao_jogador").remove_child(i)
+		i.queue_free()
+	for i in get_node("Deck").get_children():
+		get_node("Deck").remove_child(i)
+		i.queue_free()
+	createDack()
+	get_node("mesa").set_text(str(calcular_valor("mesa")))
+	get_node("jogador").set_text(str(calcular_valor("jogador")))
+	get_node("valor_aposta").set_text("")
+	pass
 
 func pegarCarta(mao):
 	var carta
@@ -74,7 +95,7 @@ func pegarCarta(mao):
 			get_node("mao_jogador").add_child(carta)
 			carta.muve(pos_mao_jogador)
 			carta.set_visible(true)
-			get_tree().paused = true
+			
 			
 			pos_mao_jogador.x+=50
 			calcular_valor("jogador")
@@ -82,8 +103,6 @@ func pegarCarta(mao):
 			get_node("mao_mesa").add_child(carta)
 			carta.muve(pos_mao_mesa)
 			carta.set_visible(true)
-			get_tree().paused = true
-		
 			pos_mao_mesa.x+=50
 			calcular_valor("mesa")
 	return carta
@@ -111,7 +130,10 @@ func calcular_valor(mao):
 	return valor
 	
 func _process(delta):
-	pegarCarta("jogador").flip()
-	pegarCarta("mesa").flip()
+	
+	if Input.is_action_just_pressed("ui_up"):
+		pegarCarta("jogador").flip()
+		pegarCarta("mesa").flip()
+	
 	
 	pass

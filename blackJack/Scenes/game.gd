@@ -9,6 +9,7 @@ var dinheiro_jogador = 100
 var dinheiro_mesa = 10000
 var valor_aposta
 var turno
+var procimoTurno
 onready var time = get_node("Timer")
 
 
@@ -19,7 +20,7 @@ enum TURNO{
 	mesa,
 	result,
 	fim,
-	pausa
+	pausa,
 }
 
 
@@ -90,52 +91,63 @@ func _process(delta):
 			get_node("result").set_text("BlackJack")
 			dinheiro_jogador += aposta*2
 			dinheiro_mesa -= aposta*2
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif jack and !black:
 			get_node("result").set_text("BlackJack da mesa")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_mesa > 21 and valor_mao_jogador > 21):
 			get_node("result").set_text("Empate")
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_mesa == valor_mao_jogador):
 			get_node("result").set_text("Empate")
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_mesa > 21 and valor_mao_jogador<=21):
 			get_node("result").set_text("vitoria")
 			dinheiro_jogador += aposta
 			dinheiro_mesa -= aposta
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_mesa <= 21 and valor_mao_jogador>21):
 			get_node("result").set_text("derrota")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_jogador > valor_mao_mesa and valor_mao_jogador <=21 ):
 			get_node("result").set_text("vitoria")
 			dinheiro_jogador += aposta
 			dinheiro_mesa -= aposta
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_mesa > valor_mao_jogador and valor_mao_mesa <=21 ):
 			get_node("result").set_text("derrota")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_jogador ==21 and valor_mao_mesa !=21 ):
 			get_node("result").set_text("vitoria")
 			dinheiro_jogador += aposta
 			dinheiro_mesa -= aposta
-			turno = TURNO.fim
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
 		elif(valor_mao_jogador !=21 and valor_mao_mesa ==21 ):
 			get_node("result").set_text("derrota")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
-			turno = TURNO.fim
-		
-			
-		
+			procimoTurno = TURNO.fim
+			turno = TURNO.pausa
+
 		pass
+		if turno == TURNO.pausa:
+			$Timer.start()
+			pass
 	if turno == TURNO.fim:
 		if Input.is_action_just_pressed("ui_left") : 
 			reset()
@@ -276,21 +288,20 @@ func pegarCarta(mao):
 			get_node("mao_jogador").add_child(carta)
 			carta.muve(pos_mao_jogador)
 			carta.set_visible(true)
-			get_tree().paused = true
-			print("true")
 			pos_mao_jogador.x+=50
 			calcular_valor("jogador")
 		if mao == "mesa" :
 			get_node("mao_mesa").add_child(carta)
 			carta.muve(pos_mao_mesa)
 			carta.set_visible(true)
-			get_tree().paused = true
-			print("true")
+			
+			
 			pos_mao_mesa.x+=50
 			calcular_valor("mesa")
 	return carta
 
 
+
 func _on_Timer_timeout():
-	
-	pass 
+	turno = procimoTurno
+	pass

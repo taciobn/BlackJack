@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/gametest.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/PNG-cards-1.3/dack.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/cardSlide7.wav" type="AudioStream" id=3]
 
@@ -10,7 +10,7 @@ vertices = PoolVector2Array( -29.8836, -15.9686, 2068.61, -14.9997, 2068.61, 632
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( -29.8836, -15.9686, 2068.61, -14.9997, 2068.61, 632.973, -32.4023, 633.054 ) ]
 
-[node name="main" type="Node"]
+[node name="main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
@@ -261,7 +261,7 @@ _sections_unfolded = [ "Rect" ]
 [node name="Timer" type="Timer" parent="." index="15"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 3.0
 one_shot = true
 autostart = false
 
