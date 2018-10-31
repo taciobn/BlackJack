@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cardPlace4.wav-54dbf69c209811953d6faa60a38d1989.sample"
+
+[deps]
+
+source_file="res://Sounds/cardPlace4.wav"
+dest_files=[ "res://.import/cardPlace4.wav-54dbf69c209811953d6faa60a38d1989.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

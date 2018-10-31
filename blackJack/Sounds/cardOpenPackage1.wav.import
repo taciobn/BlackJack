@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cardOpenPackage1.wav-bb934fc5d48cc4762f231807f553de64.sample"
+
+[deps]
+
+source_file="res://Sounds/cardOpenPackage1.wav"
+dest_files=[ "res://.import/cardOpenPackage1.wav-bb934fc5d48cc4762f231807f553de64.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

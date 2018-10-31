@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chipsCollide3.wav-0d785ce9e7c6ed8624b47e929b622c95.sample"
+
+[deps]
+
+source_file="res://Sounds/chipsCollide3.wav"
+dest_files=[ "res://.import/chipsCollide3.wav-0d785ce9e7c6ed8624b47e929b622c95.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

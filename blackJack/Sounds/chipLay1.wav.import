@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chipLay1.wav-be06a5ba88a91081899f20cec4bc756e.sample"
+
+[deps]
+
+source_file="res://Sounds/chipLay1.wav"
+dest_files=[ "res://.import/chipLay1.wav-be06a5ba88a91081899f20cec4bc756e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

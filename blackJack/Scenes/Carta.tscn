@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Carta.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/PNG-cards-1.3/2_of_clubs.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/cardSlide6.wav" type="AudioStream" id=3]
+
+[node name="carta" type="KinematicBody2D" index="0"]
+
+pause_mode = 2
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Audio" type="AudioStreamPlayer" parent="." index="1"]
+
+stream = ExtResource( 3 )
+volume_db = -32.41
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+

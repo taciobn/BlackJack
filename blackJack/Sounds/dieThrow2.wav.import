@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/dieThrow2.wav-27ec5b129e627d924259b239d4454382.sample"
+
+[deps]
+
+source_file="res://Sounds/dieThrow2.wav"
+dest_files=[ "res://.import/dieThrow2.wav-27ec5b129e627d924259b239d4454382.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

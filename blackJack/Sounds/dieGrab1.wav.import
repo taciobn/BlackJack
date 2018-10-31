@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/dieGrab1.wav-1234f1856de9e119e0ea3291db834658.sample"
+
+[deps]
+
+source_file="res://Sounds/dieGrab1.wav"
+dest_files=[ "res://.import/dieGrab1.wav-1234f1856de9e119e0ea3291db834658.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
