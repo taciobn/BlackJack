@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/PNG-cards-1.3/dack.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/cardSlide7.wav" type="AudioStream" id=3]
+[ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=4]
 
 [sub_resource type="NavigationPolygon" id=1]
 
@@ -10,7 +11,7 @@ vertices = PoolVector2Array( -29.8836, -15.9686, 2068.61, -14.9997, 2068.61, 632
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( -29.8836, -15.9686, 2068.61, -14.9997, 2068.61, 632.973, -32.4023, 633.054 ) ]
 
-[node name="main" type="Node" index="0"]
+[node name="main" type="Node"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
@@ -61,6 +62,7 @@ bus = "Master"
 
 [node name="valor1" type="Label" parent="." index="6"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -82,6 +84,7 @@ max_lines_visible = -1
 
 [node name="valor2" type="Label" parent="." index="7"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -103,6 +106,7 @@ max_lines_visible = -1
 
 [node name="mesa" type="Label" parent="." index="8"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -123,6 +127,7 @@ max_lines_visible = -1
 
 [node name="jogador" type="Label" parent="." index="9"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -143,6 +148,7 @@ max_lines_visible = -1
 
 [node name="result" type="Label" parent="." index="10"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -165,35 +171,9 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="aposta" type="LineEdit" parent="." index="11"]
+[node name="valor_aposta" type="Label" parent="." index="11"]
 
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 638.0
-margin_top = 239.0
-margin_right = 696.0
-margin_bottom = 263.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
-focus_mode = 2
-context_menu_enabled = true
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
-caret_position = 0
-_sections_unfolded = [ "Rect" ]
-
-[node name="valor_aposta" type="Label" parent="." index="12"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -214,8 +194,9 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="dinheiro_jogador" type="Label" parent="." index="13"]
+[node name="dinheiro_jogador" type="Label" parent="." index="12"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -236,8 +217,9 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="dinheiro_mesa" type="Label" parent="." index="14"]
+[node name="dinheiro_mesa" type="Label" parent="." index="13"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -258,21 +240,31 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="Timer" type="Timer" parent="." index="15"]
+[node name="Timer" type="Timer" parent="." index="14"]
 
 process_mode = 1
 wait_time = 3.0
 one_shot = true
 autostart = false
 
-[node name="Navigation" type="Navigation2D" parent="." index="16"]
+[node name="Navigation" type="Navigation2D" parent="." index="15"]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation" index="0"]
 
-position = Vector2( -648.398, -599.86 )
+position = Vector2( -642.369, -592.323 )
 scale = Vector2( 2.42875, 3.11392 )
 navpoly = SubResource( 1 )
 enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="16"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Interface" parent="CanvasLayer" index="0" instance=ExtResource( 4 )]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 

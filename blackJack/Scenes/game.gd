@@ -10,8 +10,21 @@ var dinheiro_mesa = 10000
 var valor_aposta
 var turno
 var procimoTurno
-onready var time = get_node("Timer")
 
+
+#get_nodes
+onready var time = $Timer
+#interface
+onready var apostaPanel = $CanvasLayer/Interface/ApostaPanel
+onready var apostaText = $CanvasLayer/Interface/ApostaPanel/Panel/LineEdit
+onready var dinheiroMesa = $CanvasLayer/Interface/LabelDinheiroMesa/valorMesa
+onready var dinheiroJogador = $CanvasLayer/Interface/LabelDinheiroJogador/valorJogador
+onready var dinheiroAposta = $CanvasLayer/Interface/LabelAposta/aposta
+onready var resultado = $CanvasLayer/Interface/ResultPanel/Panel/resultado
+onready var frase = $CanvasLayer/Interface/ResultPanel/Panel/frase
+onready var resultadoPanel = $CanvasLayer/Interface/ResultPanel
+onready var valorMesa = $CanvasLayer/Interface/LabelValorCartasMesa/valorCartasMesa
+onready var valorJogador = $CanvasLayer/Interface/LabelValorCartasJogador/valorCartasJogador
 
 enum TURNO{
 	aposta,
@@ -34,23 +47,26 @@ func pause():
 	
 func _process(delta):
 	if dinheiro_jogador == 0:
-		get_node("result").set_text("Voce faliu")
+		resultadoPanel.show()
+		resultado.set_text("Derrota!")
+		frase.set_text("Voce faliu")
 
 	if dinheiro_mesa == 0:
-		get_node("result").set_text("O Cassino faliu")
-
+		resultadoPanel.show()
+		resultado.set_text("Vitoria!")
+		frase.set_text("O Cassino faliu")
 	
 		
 	if turno == TURNO.aposta:
 		get_aposta()
 		if Input.is_action_just_pressed("ui_accept"):
-			aposta = int(get_node("aposta").get_text())
-			get_node("aposta").set_text("")
-			get_node("valor_aposta").set_text(str(aposta))
-			get_node("aposta").set_visible(false)
-			get_node("result").set_text("")
+			aposta = int(apostaText.get_text())
+			apostaText.set_text("")
+			dinheiroAposta.set_text(str(aposta))
+			apostaPanel.hide()
 			if aposta > dinheiro_jogador or aposta < 1:
-				get_node("result").set_text("Nao tem dinheiro")
+				resultadoPanel.show()
+				frase.set_text("Nao tem dinheiro")
 			else :
 				turno = TURNO.primeiraMao
 		pass
@@ -79,7 +95,7 @@ func _process(delta):
 			
 		else :
 			turno = TURNO.result
-		get_node("mesa").set_text(str(valor_mao_mesa))
+		valorMesa.set_text(str(valor_mao_mesa))
 		if valor_mao_mesa >=21:
 			turno = TURNO.result
 		
@@ -88,57 +104,67 @@ func _process(delta):
 		var black = valor_mao_jogador == 21 and get_node("mao_jogador").get_child_count() ==2
 		var jack  =    valor_mao_mesa == 21 and get_node("mao_mesa").get_child_count() ==2
 		if black and !jack:
-			get_node("result").set_text("BlackJack")
+			resultadoPanel.show()
+			resultado.set_text("BlackJack!")
 			dinheiro_jogador += aposta*2
 			dinheiro_mesa -= aposta*2
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif jack and !black:
-			get_node("result").set_text("BlackJack da mesa")
+			resultadoPanel.show()
+			resultado.set_text("BlackJack da mesa!")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_mesa > 21 and valor_mao_jogador > 21):
-			get_node("result").set_text("Empate")
+			resultadoPanel.show()
+			resultado.set_text("Empate!")
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_mesa == valor_mao_jogador):
-			get_node("result").set_text("Empate")
+			resultadoPanel.show()
+			resultado.set_text("Empate!")
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_mesa > 21 and valor_mao_jogador<=21):
-			get_node("result").set_text("vitoria")
+			resultadoPanel.show()
+			resultado.set_text("vitoria!")
 			dinheiro_jogador += aposta
 			dinheiro_mesa -= aposta
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_mesa <= 21 and valor_mao_jogador>21):
-			get_node("result").set_text("derrota")
+			resultadoPanel.show()
+			resultado.set_text("derrota!")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_jogador > valor_mao_mesa and valor_mao_jogador <=21 ):
-			get_node("result").set_text("vitoria")
+			resultadoPanel.show()
+			resultado.set_text("vitoria!")
 			dinheiro_jogador += aposta
 			dinheiro_mesa -= aposta
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_mesa > valor_mao_jogador and valor_mao_mesa <=21 ):
-			get_node("result").set_text("derrota")
+			resultadoPanel.show()
+			resultado.set_text("derrota!")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_jogador ==21 and valor_mao_mesa !=21 ):
-			get_node("result").set_text("vitoria")
+			resultadoPanel.show()
+			resultado.set_text("vitoria!")
 			dinheiro_jogador += aposta
 			dinheiro_mesa -= aposta
 			procimoTurno = TURNO.fim
 			turno = TURNO.pausa
 		elif(valor_mao_jogador !=21 and valor_mao_mesa ==21 ):
-			get_node("result").set_text("derrota")
+			resultadoPanel.show()
+			resultado.set_text("derrota!")
 			dinheiro_jogador -= aposta
 			dinheiro_mesa += aposta
 			procimoTurno = TURNO.fim
@@ -154,9 +180,9 @@ func _process(delta):
 			turno = TURNO.aposta
 		pass
 		
-	get_node("jogador").set_text(str(valor_mao_jogador))
-	get_node("dinheiro_jogador").set_text(str(dinheiro_jogador))
-	get_node("dinheiro_mesa").set_text(str(dinheiro_mesa))
+	valorJogador.set_text(str(valor_mao_jogador))
+	dinheiroJogador.set_text(str(dinheiro_jogador))
+	dinheiroMesa.set_text(str(dinheiro_mesa))
 		
 	pass
 	
@@ -182,8 +208,7 @@ func primeira_mao():
 	
 func get_aposta():
 	reset()
-	get_node("result").set_text("faça sua aposta")
-	get_node("aposta").set_visible(true)
+	apostaPanel.show()
 	pass
 	
 func reset():
@@ -202,9 +227,9 @@ func reset():
 		get_node("Deck").remove_child(i)
 		i.queue_free()
 	createDack()
-	get_node("mesa").set_text(str(calcular_valor("mesa")))
-	get_node("jogador").set_text(str(calcular_valor("jogador")))
-	get_node("valor_aposta").set_text("")
+	valorMesa.set_text(str(calcular_valor("mesa")))
+	valorJogador.set_text(str(calcular_valor("jogador")))
+	dinheiroAposta.set_text("")
 	pass
 
 func createDack():
